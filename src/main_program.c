@@ -22,7 +22,7 @@ void	run_program(int fd)
 	close(fd);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, game.map_width
-			* BLOCK_SIZE, game.map_height * BLOCK_SIZE, "Test Window");
+			* BLOCK_SIZE, game.map_height * BLOCK_SIZE, "So_long! Tha greatest game of all time");
 	draw_map(&game);
 	mlx_hook(game.win_ptr, 2, 1L << 0, key_press_handler, &game);
 	mlx_hook(game.win_ptr, 17, 1L << 17, close_handler, NULL);
