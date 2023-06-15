@@ -33,7 +33,11 @@ static char	*get_one_line(int fd, char *stash)
 		if (!stash)
 			stash = ft_strdup(buf);
 		else
-			stash = ft_strjoin(stash, buf);
+		{
+			char *tmp_stash = ft_strjoin(stash, buf);
+			free(stash);
+			stash = tmp_stash;
+		}
 		if (ft_strchr(stash, '\n') || bytes_read == 0)
 			break ;
 	}
@@ -44,7 +48,6 @@ static char	*get_one_line(int fd, char *stash)
 char	*get_next_line(int fd)
 {
 	static char			*stash;
-	char				*temp;
 	char				*line;
 	int					len;
 
@@ -53,9 +56,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	len = ft_strchr(stash, '\n') - stash;
 	line = ft_substr(stash, 0, len + 1);
-	temp = stash;
-	stash = ft_substr(stash, len + 1, (ft_strlen(stash) - len));
-	free(temp);
+	char *tmp_stash = ft_substr(stash, len + 1, (ft_strlen(stash) - len));
+	free(stash);
+	stash = tmp_stash;
 	if (stash && stash[0] == '\0')
 	{
 		free(stash);
@@ -68,6 +71,7 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
 
 // int main()
 // {

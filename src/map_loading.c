@@ -54,6 +54,7 @@ void	*load_sprite(void *mlx_ptr, char *filepath)
 		return (NULL);
 	}
 	return (sprite);
+	mlx_destroy_image(mlx_ptr, sprite);
 }
 
 void	draw_block(t_game *game, void *sprite, int x, int y)
@@ -86,9 +87,20 @@ void	draw_map(t_game *game)
 			"textures/collectible.xpm");
 	sprites.border = load_sprite(game->mlx_ptr, "textures/border.xpm");
 	sprites.exit = load_sprite(game->mlx_ptr, "textures/exit.xpm");
-	if (sprites.hero == NULL || sprites.floor == NULL
-		|| sprites.collectible == NULL || sprites.border == NULL
-		|| sprites.exit == NULL)
+	if (sprites.hero == NULL || sprites.floor == NULL || sprites.collectible
+		== NULL || sprites.border == NULL || sprites.exit == NULL)
+	{
+		mlx_destroy_image(game->mlx_ptr, sprites.hero);
+		mlx_destroy_image(game->mlx_ptr, sprites.floor);
+		mlx_destroy_image(game->mlx_ptr, sprites.collectible);
+		mlx_destroy_image(game->mlx_ptr, sprites.border);
+		mlx_destroy_image(game->mlx_ptr, sprites.exit);
 		return ;
+	}
 	draw_blocks(game, &sprites);
+	mlx_destroy_image(game->mlx_ptr, sprites.hero);
+	mlx_destroy_image(game->mlx_ptr, sprites.floor);
+	mlx_destroy_image(game->mlx_ptr, sprites.collectible);
+	mlx_destroy_image(game->mlx_ptr, sprites.border);
+	mlx_destroy_image(game->mlx_ptr, sprites.exit);
 }

@@ -15,6 +15,7 @@
 
 # include <mlx.h>
 # include <stdio.h>
+# include <string.h>
 # include "ft_printf/include/ft_printf.h"
 # include "ft_printf/include/libft.h"
 # include "get_next_line/get_next_line.h"
@@ -100,5 +101,6 @@ void			remove_old_player(t_game *game, void *floor);
 void			update_position(t_game *game, int new_x, int new_y);
 void			draw_new_player(t_game *game, void *hero);
 int				close_handler(void *param);
-
+void			*ft_realloc(void *ptr, size_t size);
+void free_sprites(t_sprites *sprites, void *mlx_ptr);
 #endif /* GAME_H */
