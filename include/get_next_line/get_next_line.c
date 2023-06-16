@@ -13,12 +13,17 @@
 #include "get_next_line.h"
 #include "include/libft.h"
 
-static char	*get_one_line(int fd, char *stash)
+static void	free_and_assign(char **ptr, char *new_val)
 {
-	char				*buf;
-	int					bytes_read;
+	free(*ptr);
+	*ptr = new_val;
+}
 
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+static char	*read_and_append(int fd, char *buf, char *stash)
+{
+	int		bytes_read;
+	char	*tmp_stash;
+
 	while (42)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
@@ -34,36 +39,41 @@ static char	*get_one_line(int fd, char *stash)
 			stash = ft_strdup(buf);
 		else
 		{
-			char *tmp_stash = ft_strjoin(stash, buf);
-			free(stash);
-			stash = tmp_stash;
+			tmp_stash = ft_strjoin(stash, buf);
+			free_and_assign(&stash, tmp_stash);
 		}
 		if (ft_strchr(stash, '\n') || bytes_read == 0)
 			break ;
 	}
+	return (stash);
+}
+
+static char	*get_one_line(int fd, char *stash)
+{
+	char	*buf;
+
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	stash = read_and_append(fd, buf, stash);
 	free(buf);
 	return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char			*stash;
-	char				*line;
-	int					len;
+	static char	*stash;
+	char		*line;
+	int			len;
+	char		*tmp_stash;
 
 	stash = get_one_line(fd, stash);
 	if (!stash)
 		return (NULL);
 	len = ft_strchr(stash, '\n') - stash;
 	line = ft_substr(stash, 0, len + 1);
-	char *tmp_stash = ft_substr(stash, len + 1, (ft_strlen(stash) - len));
-	free(stash);
-	stash = tmp_stash;
+	tmp_stash = ft_substr(stash, len + 1, (ft_strlen(stash) - len));
+	free_and_assign(&stash, tmp_stash);
 	if (stash && stash[0] == '\0')
-	{
-		free(stash);
-		stash = NULL;
-	}
+		free_and_assign(&stash, NULL);
 	if (line[0] == '\0')
 	{
 		free(line);
@@ -71,16 +81,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-
-// int main()
-// {
-// 	int fd;
-// 	char *line;
-
-// 	fd = open("file.txt", O_RDONLY);
-// 	printf("%s\n", get_next_line(fd));
-// 	printf("%s\n", get_next_line(fd));
-// 	printf("%s\n", get_next_line(fd));
-// 	return 0;
-// }
