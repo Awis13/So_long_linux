@@ -102,5 +102,5 @@ void			update_position(t_game *game, int new_x, int new_y);
 void			draw_new_player(t_game *game, void *hero);
 int				close_handler(void *param);
 void			*ft_realloc(void *ptr, size_t size);
-void free_sprites(t_sprites *sprites, void *mlx_ptr);
+void			free_sprites(t_sprites *sprites, void *mlx_ptr);
 #endif /* GAME_H */
