@@ -12,12 +12,22 @@
 
 #include "game.h"
 
+// This function is a handler for the close event. 
+// It takes no parameters and returns 0 after exiting the program.
 int	close_handler(void *param)
 {
 	(void)param;
 	exit(0);
 	return (0);
 }
+
+// This function reallocates memory.
+// It takes a pointer to the memory and the new size as parameters.
+// If the size is 0, it frees the memory and returns NULL. 
+// If the pointer is NULL, it allocates new memory.
+// If both are provided, it allocates new memory, 
+// copies the old data to the new location, 
+// frees the old memory, and returns a pointer to the new memory.
 
 void	*ft_realloc(void *ptr, size_t size)
 {
@@ -39,6 +49,12 @@ void	*ft_realloc(void *ptr, size_t size)
 	return (new_ptr);
 }
 
+// This is the main function of the program. 
+// It takes the number of command line arguments and 
+// an array of the arguments as parameters. 
+// It opens the file provided as an argument, 
+// checks for errors, and runs the program if everything is okay.
+
 int	main(int argc, char **argv)
 {
 	int	fd;
@@ -54,6 +70,10 @@ int	main(int argc, char **argv)
 	run_program(fd);
 	return (0);
 }
+
+// This function frees the memory allocated for the sprites. 
+// It takes a pointer to the sprites and a pointer to the MiniLibX 
+// instance as parameters. It destroys the images associated with each sprite.
 
 void	free_sprites(t_sprites *sprites, void *mlx_ptr)
 {

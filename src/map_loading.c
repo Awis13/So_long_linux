@@ -12,6 +12,11 @@
 
 #include "game.h"
 
+// This function validates the game map.
+// It takes the file descriptor and a pointer to the game state as parameters.
+// It reads the map from the file, checks if it is valid, 
+// and updates the game state.
+// It returns 1 if the map is valid and 0 otherwise.
 int	map_validate(int fd, t_game *game)
 {
 	char	*line;
@@ -41,6 +46,9 @@ int	map_validate(int fd, t_game *game)
 	return (1);
 }
 
+// This function loads a sprite from a file.
+// It takes a pointer to the MiniLibX instance and the file path as parameters.
+// It returns the loaded sprite or NULL if the sprite could not be loaded.
 void	*load_sprite(void *mlx_ptr, char *filepath)
 {
 	int		width;
@@ -57,6 +65,10 @@ void	*load_sprite(void *mlx_ptr, char *filepath)
 	mlx_destroy_image(mlx_ptr, sprite);
 }
 
+// This function draws a block at a given position in the game.
+// It takes a pointer to the game state, the sprite to draw, 
+// and the x and y coordinates as parameters.
+// It draws the sprite at the given position.
 void	draw_block(t_game *game, void *sprite, int x, int y)
 {
 	int	offset_x;
@@ -77,6 +89,10 @@ void	draw_block(t_game *game, void *sprite, int x, int y)
 	}
 }
 
+// This function draws the game map.
+// It takes a pointer to the game state as parameters.
+// It loads the sprites for the different types of blocks 
+// and draws them at their respective positions.
 void	draw_map(t_game *game)
 {
 	t_sprites	sprites;

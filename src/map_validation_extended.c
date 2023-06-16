@@ -12,6 +12,10 @@
 
 #include "game.h"
 
+// This function validates the size of the game map.
+// It takes a pointer to the game state as a parameter.
+// It checks if the map meets the size conditions 
+// and returns 1 if it does and 0 otherwise.
 int	validate_map(int fd, t_game *game, char *line)
 {
 	line = get_next_line(fd);
@@ -40,6 +44,10 @@ int	validate_map(int fd, t_game *game, char *line)
 	return (0);
 }
 
+// This function validates the size of the game map.
+// It takes a pointer to the game state as a parameter.
+// It checks if the map meets the size conditions 
+// and returns 1 if it does and 0 otherwise.
 int	validate_map_size(t_game *game)
 {
 	ft_printf("\nMap validation successful\n");
@@ -51,6 +59,9 @@ int	validate_map_size(t_game *game)
 	return (0);
 }
 
+// This function checks if the game map is surrounded by walls.
+// It takes a pointer to the game state as a parameter.
+// It returns 1 if the map is surrounded by walls and 0 otherwise.
 int	validate_map_closed(t_game *game)
 {
 	if (!check_map_closed(game->map, game->map_width, game->map_height))

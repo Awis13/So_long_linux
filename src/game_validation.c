@@ -12,6 +12,9 @@
 
 #include "game.h"
 
+// This function frees the memory allocated for the game map.
+// It takes the game map and its height as parameters.
+// It frees each row of the map and then the map itself.
 void	free_map(char **map, int map_height)
 {
 	int	y;
@@ -25,6 +28,11 @@ void	free_map(char **map, int map_height)
 	free(map);
 }
 
+// This function checks if there are any unreachable areas in the game map.
+// It takes the game map and its width and height as parameters.
+// It performs a flood fill operation starting from the player's 
+// position and then checks for unreachable areas.
+// It returns 1 if there are no unreachable areas and 0 otherwise.
 int	check_map_path(char **map, int map_width, int map_height)
 {
 	int			y;
@@ -49,6 +57,13 @@ int	check_map_path(char **map, int map_width, int map_height)
 	return (check_unreachable_areas(map, map_width, map_height));
 }
 
+// This function checks if the game map meets certain conditions.
+// It takes the game map and its width and height, 
+// and a pointer to the game state as parameters.
+// It counts the number of exits, collectibles, 
+// and starting positions in the map and validates these counts.
+// It also updates the number of collectibles in the game state.
+// It returns 1 if the conditions are met and 0 otherwise.
 int	check_map_conditions(char **map, int map_width,
 	int map_height, t_game *game)
 {
@@ -76,6 +91,9 @@ int	check_map_conditions(char **map, int map_width,
 	return (1);
 }
 
+// This function gets the width of a line in the game map.
+// It takes a line as a parameter and returns the number 
+// of characters before the newline or null character.
 int	get_line_width(char *line)
 {
 	int	i;

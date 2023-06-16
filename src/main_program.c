@@ -12,6 +12,10 @@
 
 #include "game.h"
 
+// This function runs the game.
+// It takes the file descriptor of the game map file as a parameter.
+// It validates the map, initializes the game state, 
+// creates a new window, draws the map, and starts the game loop.
 void	run_program(int fd)
 {
 	t_game	game;
@@ -29,6 +33,11 @@ void	run_program(int fd)
 	mlx_loop(game.mlx_ptr);
 }
 
+// This function draws all the blocks in the game map.
+// It takes a pointer to the game state 
+// and a pointer to the sprites as parameters.
+// It iterates over the game map and draws the 
+// corresponding block for each character.
 void	draw_blocks(t_game *game, t_sprites *sprites)
 {
 	t_coordinates	coords;
@@ -48,6 +57,13 @@ void	draw_blocks(t_game *game, t_sprites *sprites)
 	}
 }
 
+// This function draws a specific type of block on the game map.
+// It takes a pointer to the game state, a pointer to the sprites, 
+// the type of block to draw, and the coordinates as parameters.
+// Depending on the block type, it draws 
+// the corresponding sprite at the given coordinates.
+// If the block type is a player, it also updates the 
+// player coordinates in the game state.
 void	draw_block_type(t_game *game, t_sprites *sprites,
 		char block_type, t_coordinates coords)
 {
@@ -70,6 +86,10 @@ void	draw_block_type(t_game *game, t_sprites *sprites,
 	}
 }
 
+// This function validates the conditions of the game map.
+// It takes a pointer to the game state as a parameter.
+// It checks if the map conditions 
+// are met and returns 1 if they are not and 0 if they are.
 int	validate_map_conditions(t_game *game)
 {
 	if (!check_map_conditions(game->map, game->map_width,

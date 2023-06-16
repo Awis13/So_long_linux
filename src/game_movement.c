@@ -12,6 +12,9 @@
 
 #include "game.h"
 
+// This function opens a file for reading.
+// It takes the filename as a parameter and returns the file descriptor.
+// If the file cannot be opened, it prints an error message and returns -1.
 int	open_file(const char *filename)
 {
 	int	fd;
@@ -25,6 +28,11 @@ int	open_file(const char *filename)
 	return (fd);
 }
 
+// This function draws a block at a given position in the game.
+// It takes a pointer to the game state, the type of block to draw, 
+// and the x and y coordinates as parameters.
+// Depending on the block type, it loads the corresponding
+// sprite and draws it at the given position.
 void	draw_block_at_position(t_game *game, char block_type, int x, int y)
 {
 	void	*sprite;
@@ -43,6 +51,12 @@ void	draw_block_at_position(t_game *game, char block_type, int x, int y)
 		return ;
 	draw_block(game, sprite, x, y);
 }
+// This function handles the movement of the player.
+// It takes a pointer to the game state and the new x 
+// and y coordinates as parameters.
+// It checks if the movement is valid and updates the game state accordingly.
+// If the player moves to the exit without collecting all collectibles, 
+// it prints a message and does not move the player.
 
 void	handle_movement(t_game *game, int new_x, int new_y)
 {
@@ -66,6 +80,12 @@ void	handle_movement(t_game *game, int new_x, int new_y)
 	draw_new_player(game, hero);
 }
 
+// This function handles key press events.
+// It takes the keycode and a pointer to the game state as parameters.
+// If the escape key is pressed, it destroys the window, 
+// frees the game map, and exits the program.
+// If the 'w', 'a', 's', or 'd' key is pressed, 
+// it updates the player's position and handles the movement.
 int	key_press_handler(int keycode, t_game *game)
 {
 	int	new_x;

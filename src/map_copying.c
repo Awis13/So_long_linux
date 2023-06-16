@@ -12,6 +12,11 @@
 
 #include "game.h"
 
+// This function copies a row from the game map.
+// It takes the row and its width as parameters.
+// It allocates memory for the copy and copies each 
+// character from the original row.
+// It returns the copied row.
 char	*copy_row(char *row, int row_width)
 {
 	char	*copy;
