@@ -62,7 +62,3 @@ Getting the game up and running on macOS involves a few simple steps:
     ```
 
     Enjoy your game! 😄
-
-### 🤝 Contributing
-
-This project highly values and respects other people's work. Contributions are always welcome, but please ensure adherence to this principle. Your creativity and suggestions can help make this game even more thrilling! 😃
